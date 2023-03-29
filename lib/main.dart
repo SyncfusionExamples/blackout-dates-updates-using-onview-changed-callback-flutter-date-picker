@@ -1,13 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 void main() {
-  return runApp(BlackoutDatesUpdation());
+  return runApp(const BlackoutDatesUpdation());
 }
 
 class BlackoutDatesUpdation extends StatefulWidget {
+  const BlackoutDatesUpdation({super.key});
+
   @override
   BlackoutDates createState() => BlackoutDates();
 }
@@ -25,7 +26,7 @@ class BlackoutDates extends State<BlackoutDatesUpdation> {
               selectionMode: DateRangePickerSelectionMode.single,
               monthViewSettings: DateRangePickerMonthViewSettings(
                   blackoutDates: _blackoutDates),
-              monthCellStyle: DateRangePickerMonthCellStyle(
+              monthCellStyle: const DateRangePickerMonthCellStyle(
                 blackoutDateTextStyle: TextStyle(
                     color: Colors.red, decoration: TextDecoration.lineThrough),
               ),
@@ -36,16 +37,16 @@ class BlackoutDates extends State<BlackoutDatesUpdation> {
   }
 
   void viewChanged(DateRangePickerViewChangedArgs args) {
-    List<DateTime> _blackoutDateCollection = <DateTime>[];
+    List<DateTime> blackoutDateCollection = <DateTime>[];
     final DateTime visibleStartDate = args.visibleDateRange.startDate!;
-    _blackoutDateCollection.add(visibleStartDate);
-    _blackoutDateCollection.add(visibleStartDate.add(Duration(days: 1)));
-    _blackoutDateCollection.add(visibleStartDate.add(Duration(days: 2)));
-    _blackoutDateCollection.add(visibleStartDate.add(Duration(days: 3)));
-    _blackoutDateCollection.add(visibleStartDate.add(Duration(days: 4)));
-    SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
+    blackoutDateCollection.add(visibleStartDate);
+    blackoutDateCollection.add(visibleStartDate.add(const Duration(days: 1)));
+    blackoutDateCollection.add(visibleStartDate.add(const Duration(days: 2)));
+    blackoutDateCollection.add(visibleStartDate.add(const Duration(days: 3)));
+    blackoutDateCollection.add(visibleStartDate.add(const Duration(days: 4)));
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       setState(() {
-        _blackoutDates = _blackoutDateCollection;
+        _blackoutDates = blackoutDateCollection;
       });
     });
   }
